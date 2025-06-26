@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import BasicDateTimePickerExample from "@/app/examples/basic-datetime-picker"
 import AppointmentFormExample from "@/app/examples/appointment-form"
+import BasicDateTimePickerExample from "@/app/examples/basic-datetime-picker"
 import DateTimePickerShowcaseExample from "@/app/examples/datetime-showcase"
 import { OpenInV0Button } from "@/components/open-in-v0-button"
 import { RegistryCommand } from "@/components/registry-command"
@@ -51,7 +51,10 @@ export default function Home() {
           ShadCN Natural Language DateTime Input
         </h1>
         <p className="text-muted-foreground">
-          A powerful and intuitive ShadCN/UI component that allows users to input dates and times using natural language expressions like "tomorrow", "next Monday at 3pm", or "in 2 hours". Built with chrono-node for robust natural language parsing.
+          A powerful and intuitive ShadCN/UI component that allows users to
+          input dates and times using natural language expressions like
+          "tomorrow", "next Monday at 3pm", or "in 2 hours". Built with
+          chrono-node for robust natural language parsing.
         </p>
         <RegistryCommand registryId="lingua-time" />
       </header>

@@ -21,5 +21,4 @@ The updated `DateTimePicker` and `DateTimePickerPopover` components introduce so
 5. **Improved Suggestion System**: Suggestions update in real-time as you type, prioritizing default suggestions and falling back to parsed inputs (via `chrono-node`), offering a more intuitive natural language experience.
 
 6. **Better Keyboard Navigation**: Arrow keys, Enter, and Escape now work seamlessly in the suggestion dropdown, improving accessibility for keyboard-only users.
-
-7. **Polished UI and Accessibility**: The suggestion dropdown features smoother animations and proper ARIA attributes, enhancing the visual experience and screen reader compatibility.
+P

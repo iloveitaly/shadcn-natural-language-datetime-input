@@ -5,7 +5,6 @@ import { addDays } from "date-fns"
 import { Calendar, User, Clock } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DateTimePicker } from "@/registry/new-york/lingua-time/datetime-picker"
@@ -20,7 +19,8 @@ interface AppointmentFormData {
 
 export default function AppointmentFormExample() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submittedData, setSubmittedData] = useState<AppointmentFormData | null>(null)
+  const [submittedData, setSubmittedData] =
+    useState<AppointmentFormData | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   // Form state
@@ -41,7 +41,8 @@ export default function AppointmentFormExample() {
     if (appointmentDate < new Date()) {
       newErrors.appointmentDate = "Appointment date cannot be in the past"
     } else if (appointmentDate > addDays(new Date(), 365)) {
-      newErrors.appointmentDate = "Appointment cannot be more than a year in the future"
+      newErrors.appointmentDate =
+        "Appointment cannot be more than a year in the future"
     }
 
     setErrors(newErrors)
@@ -50,13 +51,13 @@ export default function AppointmentFormExample() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
 
     setIsSubmitting(true)
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    
+
     setSubmittedData({
       patientName,
       appointmentDate,
@@ -77,114 +78,106 @@ export default function AppointmentFormExample() {
 
   return (
     <div className="w-full max-w-2xl space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
-            Schedule Appointment
-          </CardTitle>
-          <CardDescription>
-            Use natural language to set appointment dates like "next Tuesday at 2pm" or "tomorrow morning"
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="patientName" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                Patient Name
-              </Label>
-              <Input
-                id="patientName"
-                value={patientName}
-                onChange={(e) => setPatientName(e.target.value)}
-                placeholder="Enter patient name"
-                className={errors.patientName ? "border-red-500" : ""}
-              />
-              {errors.patientName && (
-                <p className="text-sm text-red-500">{errors.patientName}</p>
-              )}
-            </div>
+      <form onSubmit={onSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <Label htmlFor="patientName" className="flex items-center gap-2">
+            <User className="h-4 w-4" />
+            Patient Name
+          </Label>
+          <Input
+            id="patientName"
+            value={patientName}
+            onChange={(e) => setPatientName(e.target.value)}
+            placeholder="Enter patient name"
+            className={errors.patientName ? "border-red-500" : ""}
+          />
+          {errors.patientName && (
+            <p className="text-sm text-red-500">{errors.patientName}</p>
+          )}
+        </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="appointmentDate" className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                Appointment Date & Time
-              </Label>
-              <DateTimePicker
-                id="appointmentDate"
-                value={appointmentDate}
-                onChange={(date) => date && setAppointmentDate(date)}
-                showTimePicker={true}
-                suggestions={[
-                  "Tomorrow at 9am",
-                  "Next Monday at 2pm",
-                  "Next Friday at 10:30am",
-                  "In 3 days at 3pm",
-                ]}
-                placeholder="Enter appointment date (e.g., 'next Tuesday at 2pm')"
-                className={errors.appointmentDate ? "border-red-500" : ""}
-              />
-              {errors.appointmentDate && (
-                <p className="text-sm text-red-500">{errors.appointmentDate}</p>
-              )}
-            </div>
+        <div className="space-y-2">
+          <Label
+            htmlFor="appointmentDate"
+            className="flex items-center gap-2"
+          >
+            <Clock className="h-4 w-4" />
+            Appointment Date & Time
+          </Label>
+          <DateTimePicker
+            id="appointmentDate"
+            value={appointmentDate}
+            onChange={(date) => date && setAppointmentDate(date)}
+            showTimePicker={true}
+            suggestions={[
+              "Tomorrow at 9am",
+              "Next Monday at 2pm",
+              "Next Friday at 10:30am",
+              "In 3 days at 3pm",
+            ]}
+            placeholder="Enter appointment date (e.g., 'next Tuesday at 2pm')"
+            className={errors.appointmentDate ? "border-red-500" : ""}
+          />
+          {errors.appointmentDate && (
+            <p className="text-sm text-red-500">{errors.appointmentDate}</p>
+          )}
+        </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="followUpDate">Follow-up Date (Optional)</Label>
-              <DateTimePicker
-                id="followUpDate"
-                value={followUpDate || new Date()}
-                onChange={(date) => setFollowUpDate(date)}
-                showTimePicker={false}
-                suggestions={[
-                  "In 2 weeks",
-                  "In 1 month", 
-                  "In 3 months",
-                  "Next quarter",
-                ]}
-                placeholder="Enter follow-up date (e.g., 'in 2 weeks')"
-              />
-            </div>
+        <div className="space-y-2">
+          <Label htmlFor="followUpDate">Follow-up Date (Optional)</Label>
+          <DateTimePicker
+            id="followUpDate"
+            value={followUpDate || new Date()}
+            onChange={(date) => setFollowUpDate(date)}
+            showTimePicker={false}
+            suggestions={[
+              "In 2 weeks",
+              "In 1 month",
+              "In 3 months",
+              "Next quarter",
+            ]}
+            placeholder="Enter follow-up date (e.g., 'in 2 weeks')"
+          />
+        </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="notes">Notes (Optional)</Label>
-              <Textarea
-                id="notes"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Additional notes or special instructions"
-                rows={3}
-              />
-            </div>
+        <div className="space-y-2">
+          <Label htmlFor="notes">Notes (Optional)</Label>
+          <Textarea
+            id="notes"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Additional notes or special instructions"
+            rows={3}
+          />
+        </div>
 
-            <div className="flex gap-4">
-              <Button type="submit" disabled={isSubmitting} className="flex-1">
-                {isSubmitting ? "Scheduling..." : "Schedule Appointment"}
-              </Button>
-              <Button type="button" variant="outline" onClick={handleReset}>
-                Reset
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+        <div className="flex gap-4">
+          <Button type="submit" disabled={isSubmitting} className="flex-1">
+            {isSubmitting ? "Scheduling..." : "Schedule Appointment"}
+          </Button>
+          <Button type="button" variant="outline" onClick={handleReset}>
+            Reset
+          </Button>
+        </div>
+      </form>
 
       {submittedData && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-green-600">Appointment Scheduled!</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
+        <div className="p-4 bg-green-50 border border-green-200 rounded-lg space-y-2">
+          <h3 className="font-semibold text-green-800">
+            Appointment Scheduled!
+          </h3>
+          <div className="space-y-1 text-sm">
             <div>
               <strong>Patient:</strong> {submittedData.patientName}
             </div>
             <div>
-              <strong>Appointment:</strong> {submittedData.appointmentDate.toLocaleString()}
+              <strong>Appointment:</strong>{" "}
+              {submittedData.appointmentDate.toLocaleString()}
             </div>
             {submittedData.followUpDate && (
               <div>
-                <strong>Follow-up:</strong> {submittedData.followUpDate.toLocaleDateString()}
+                <strong>Follow-up:</strong>{" "}
+                {submittedData.followUpDate.toLocaleDateString()}
               </div>
             )}
             {submittedData.notes && (
@@ -192,8 +185,8 @@ export default function AppointmentFormExample() {
                 <strong>Notes:</strong> {submittedData.notes}
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
     </div>
   )
