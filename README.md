@@ -1,5 +1,5 @@
-# TITLE_OF_COMPONENT
+# ShadCN Natural Language DateTime Input
 
-Short 1-3 sentences description of the component.
+A powerful and intuitive ShadCN/UI component that allows users to input dates and times using natural language expressions like "tomorrow", "next Monday at 3pm", or "in 2 hours". Built with chrono-node for robust natural language parsing and designed to seamlessly integrate with existing ShadCN/UI projects.
 
-Link to GitHub Pages URL for the component. Use `gh repo view` to generate the correct link and display the bare URL.
+**Demo:** <https://iloveitaly.github.io/shadcn-natural-language-datetime-input>

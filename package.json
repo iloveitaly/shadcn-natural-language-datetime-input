@@ -1,14 +1,25 @@
 {
-  "name": "registry-template",
+  "name": "shadcn-natural-language-datetime-input",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A template for creating a registry of shadcn component registries, without next, and hosting them on GitHub Pages.",
-  "homepage": "https://iloveitaly.github.io/shadcn-registry-template-github-pages",
+  "description": "A powerful ShadCN/UI component library for natural language datetime input. Parse expressions like 'tomorrow at 3pm', 'next Monday', or 'in 2 hours' with built-in calendar and time picker support.",
+  "homepage": "https://iloveitaly.github.io/shadcn-natural-language-datetime-input",
   "keywords": [
     "shadcn",
     "shadcn-ui",
-    "shadcn-registry"
+    "shadcn-registry",
+    "datetime",
+    "date-picker",
+    "time-picker",
+    "natural-language",
+    "chrono-node",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "calendar",
+    "date-input",
+    "ui-components"
   ],
   "scripts": {
     "dev": "vite",

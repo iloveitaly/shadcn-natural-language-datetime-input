@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "acme",
-  "homepage": "https://acme.com",
+  "name": "shadcn-natural-language-datetime-input",
+  "homepage": "https://iloveitaly.github.io/shadcn-natural-language-datetime-input",
   "items": [
     {
       "name": "hello-world",
