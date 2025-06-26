@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import ComplexComponentExample from "@/app/examples/complex-component"
-import ExampleFormExample from "@/app/examples/example-form"
-import HelloWorldExample from "@/app/examples/hello-world"
+import BasicDateTimePickerExample from "@/app/examples/basic-datetime-picker"
+import AppointmentFormExample from "@/app/examples/appointment-form"
+import DateTimePickerShowcaseExample from "@/app/examples/datetime-showcase"
 import { OpenInV0Button } from "@/components/open-in-v0-button"
 import { RegistryCommand } from "@/components/registry-command"
 import { ShowSourceButton } from "@/components/show-source-button"
@@ -48,40 +48,39 @@ export default function Home() {
     <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8">
       <header className="flex flex-col gap-1 space-y-6 mb-6">
         <h1 className="text-3xl font-bold tracking-tight">
-          Custom ShadCN Registry
+          ShadCN Natural Language DateTime Input
         </h1>
         <p className="text-muted-foreground">
-          A custom registry for distribing shadcn components using shadcn. I
-          recommend using multiple registries for different types of components,
-          so users can easily contribute back.
+          A powerful and intuitive ShadCN/UI component that allows users to input dates and times using natural language expressions like "tomorrow", "next Monday at 3pm", or "in 2 hours". Built with chrono-node for robust natural language parsing.
         </p>
-        <RegistryCommand registryId="example-form" />
+        <RegistryCommand registryId="lingua-time" />
       </header>
 
       <main className="flex flex-col flex-1 gap-8">
         <ComponentDisplay
-          name="hello-world"
-          description="A simple hello world component"
-          filePath="app/examples/hello-world.tsx"
+          name="basic-datetime-picker"
+          description="A simple datetime picker with natural language input"
+          filePath="app/examples/basic-datetime-picker.tsx"
         >
-          <HelloWorldExample />
+          <BasicDateTimePickerExample />
         </ComponentDisplay>
 
         <ComponentDisplay
-          name="example-form"
-          description="A contact form with Zod validation."
-          minHeight="500px"
-          filePath="app/examples/example-form.tsx"
+          name="appointment-form"
+          description="A complete appointment scheduling form with validation"
+          minHeight="600px"
+          filePath="app/examples/appointment-form.tsx"
         >
-          <ExampleFormExample />
+          <AppointmentFormExample />
         </ComponentDisplay>
 
         <ComponentDisplay
-          name="complex-component"
-          description="A complex component showing hooks, libs and components."
-          filePath="app/examples/complex-component.tsx"
+          name="datetime-showcase"
+          description="Showcase of different use cases and natural language examples"
+          minHeight="700px"
+          filePath="app/examples/datetime-showcase.tsx"
         >
-          <ComplexComponentExample />
+          <DateTimePickerShowcaseExample />
         </ComponentDisplay>
       </main>
     </div>
