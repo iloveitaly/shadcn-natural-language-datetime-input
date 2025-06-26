@@ -1,9 +1,6 @@
-"use client"
-
 import { useEffect, useState } from "react"
 
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "~/components/ui/calendar"
 import {
   Drawer,
   DrawerContent,
@@ -11,15 +8,15 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from "~/components/ui/drawer"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "~/components/ui/popover"
+import { useMediaQuery } from "~/hooks/use-media-query"
 
 import { TimePicker } from "../time-picker/time-picker"
-import { generateDateString } from "./datetime-utils"
 
 interface DateTimePickerPopoverProps {
   children: React.ReactNode
@@ -27,6 +24,8 @@ interface DateTimePickerPopoverProps {
   dateTime: Date | undefined
   setDateTime: React.Dispatch<React.SetStateAction<Date | undefined>>
   setInputValue: React.Dispatch<React.SetStateAction<string>>
+  showTimePicker: boolean
+  dateTimeFormatFunction: (date: Date) => string
 }
 
 export function DateTimePickerPopover({
@@ -35,17 +34,22 @@ export function DateTimePickerPopover({
   dateTime,
   setDateTime,
   setInputValue,
+  showTimePicker,
+  dateTimeFormatFunction,
 }: DateTimePickerPopoverProps) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const isDesktop = useMediaQuery("(min-width: 640px)")
 
-  useEffect(() => {
-    if (dateTime) {
-      setInputValue(generateDateString(dateTime))
+  // we wrap the setDateTime function in order to make sync the text date representation and date object are in sync
+  function handleDateTimeChange(date: Date | undefined) {
+    setDateTime(date)
+
+    if (date) {
+      setInputValue(dateTimeFormatFunction(date))
     }
-  }, [dateTime, setInputValue])
+  }
 
   if (!isDesktop) {
     return (
@@ -67,13 +71,15 @@ export function DateTimePickerPopover({
             <Calendar
               mode="single"
               selected={dateTime}
-              onSelect={setDateTime}
+              onSelect={handleDateTimeChange}
               initialFocus
               className="self-center"
             />
-            <div className="border-t border-border p-3">
-              <TimePicker date={dateTime} setDate={setDateTime} />
-            </div>
+            {showTimePicker && (
+              <div className="border-border border-t p-3">
+                <TimePicker date={dateTime} setDate={handleDateTimeChange} />
+              </div>
+            )}
           </div>
         </DrawerContent>
       </Drawer>
@@ -93,12 +99,14 @@ export function DateTimePickerPopover({
         <Calendar
           mode="single"
           selected={dateTime}
-          onSelect={setDateTime}
+          onSelect={handleDateTimeChange}
           initialFocus
         />
-        <div className="border-t border-border p-3">
-          <TimePicker date={dateTime} setDate={setDateTime} />
-        </div>
+        {showTimePicker && (
+          <div className="border-border border-t p-3">
+            <TimePicker date={dateTime} setDate={handleDateTimeChange} />
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   )
