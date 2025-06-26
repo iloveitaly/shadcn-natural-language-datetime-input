@@ -70,7 +70,7 @@ export default function Home() {
 
         <ComponentDisplay
           name="appointment-form"
-          description="A complete appointment scheduling form with validation"
+          description="A date scheduling form with validation and multiple date inputs"
           minHeight="600px"
           filePath="app/examples/appointment-form.tsx"
         >

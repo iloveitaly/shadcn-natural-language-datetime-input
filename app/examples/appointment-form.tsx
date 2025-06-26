@@ -2,19 +2,15 @@
 
 import { useState } from "react"
 import { addDays } from "date-fns"
-import { Calendar, User, Clock } from "lucide-react"
+import { Clock } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DateTimePicker } from "@/registry/new-york/lingua-time/datetime-picker"
-import { Textarea } from "@/components/ui/textarea"
 
 interface AppointmentFormData {
-  patientName: string
   appointmentDate: Date
   followUpDate?: Date
-  notes?: string
 }
 
 export default function AppointmentFormExample() {
@@ -24,19 +20,11 @@ export default function AppointmentFormExample() {
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   // Form state
-  const [patientName, setPatientName] = useState("")
   const [appointmentDate, setAppointmentDate] = useState<Date>(new Date())
   const [followUpDate, setFollowUpDate] = useState<Date | undefined>()
-  const [notes, setNotes] = useState("")
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
-
-    if (!patientName.trim()) {
-      newErrors.patientName = "Patient name is required"
-    } else if (patientName.trim().length < 2) {
-      newErrors.patientName = "Patient name must be at least 2 characters"
-    }
 
     if (appointmentDate < new Date()) {
       newErrors.appointmentDate = "Appointment date cannot be in the past"
@@ -59,19 +47,15 @@ export default function AppointmentFormExample() {
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     setSubmittedData({
-      patientName,
       appointmentDate,
       followUpDate,
-      notes: notes || undefined,
     })
     setIsSubmitting(false)
   }
 
   const handleReset = () => {
-    setPatientName("")
     setAppointmentDate(new Date())
     setFollowUpDate(undefined)
-    setNotes("")
     setErrors({})
     setSubmittedData(null)
   }
@@ -79,23 +63,6 @@ export default function AppointmentFormExample() {
   return (
     <div className="w-full max-w-2xl space-y-6">
       <form onSubmit={onSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="patientName" className="flex items-center gap-2">
-            <User className="h-4 w-4" />
-            Patient Name
-          </Label>
-          <Input
-            id="patientName"
-            value={patientName}
-            onChange={(e) => setPatientName(e.target.value)}
-            placeholder="Enter patient name"
-            className={errors.patientName ? "border-red-500" : ""}
-          />
-          {errors.patientName && (
-            <p className="text-sm text-red-500">{errors.patientName}</p>
-          )}
-        </div>
-
         <div className="space-y-2">
           <Label
             htmlFor="appointmentDate"
@@ -140,17 +107,6 @@ export default function AppointmentFormExample() {
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="notes">Notes (Optional)</Label>
-          <Textarea
-            id="notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Additional notes or special instructions"
-            rows={3}
-          />
-        </div>
-
         <div className="flex gap-4">
           <Button type="submit" disabled={isSubmitting} className="flex-1">
             {isSubmitting ? "Scheduling..." : "Schedule Appointment"}
@@ -168,9 +124,6 @@ export default function AppointmentFormExample() {
           </h3>
           <div className="space-y-1 text-sm">
             <div>
-              <strong>Patient:</strong> {submittedData.patientName}
-            </div>
-            <div>
               <strong>Appointment:</strong>{" "}
               {submittedData.appointmentDate.toLocaleString()}
             </div>
@@ -178,11 +131,6 @@ export default function AppointmentFormExample() {
               <div>
                 <strong>Follow-up:</strong>{" "}
                 {submittedData.followUpDate.toLocaleDateString()}
-              </div>
-            )}
-            {submittedData.notes && (
-              <div>
-                <strong>Notes:</strong> {submittedData.notes}
               </div>
             )}
           </div>
