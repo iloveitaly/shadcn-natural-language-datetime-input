@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Clock, CalendarCheck, Users } from "lucide-react"
+import { CalendarCheck, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"

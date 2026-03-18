@@ -1,0 +1,15 @@
+
+> shadcn-natural-language-datetime-input@0.1.0 dev /app
+> vite
+
+
+  VITE v7.3.1  ready in 1271 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+12:46:37 PM [vite] (client) hmr update /app/globals.css, /components/ui/calendar.tsx
+12:46:37 PM [vite] (client) hmr update /app/globals.css, /components/ui/button.tsx
+12:48:28 PM [vite] (client) ✨ new dependencies optimized: radix-ui
+12:48:28 PM [vite] (client) ✨ optimized dependencies changed. reloading
+12:49:48 PM [vite] (client) hmr update /app/globals.css, /components/ui/calendar.tsx
+12:50:36 PM [vite] (client) hmr update /app/globals.css, /components/ui/calendar.tsx

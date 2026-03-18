@@ -20,7 +20,6 @@ import {
   generateDate,
   generateDateString,
   generateDateTimeString,
-  isValidDateFormat,
 } from "./datetime-utils"
 
 const DEFAULT_SUGGESTIONS = [
@@ -351,13 +350,13 @@ export const DateTimePicker = forwardRef<HTMLInputElement, DateTimePickerProps>(
             tabIndex={-1}
             aria-label="Suggestions"
           >
-            <ul
+            <div
               role="listbox"
               aria-label="Suggestions"
               className="max-h-56 overflow-auto p-1"
             >
               {computedSuggestions.map((sugg, index) => (
-                <li
+                <div
                   key={sugg.inputString}
                   role="option"
                   aria-selected={selectedIndex === index}
@@ -367,6 +366,13 @@ export const DateTimePicker = forwardRef<HTMLInputElement, DateTimePickerProps>(
                       "bg-accent text-accent-foreground",
                   )}
                   onClick={() => handleSelectedSuggestion(sugg)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      handleSelectedSuggestion(sugg)
+                    }
+                  }}
+                  tabIndex={0}
                   // highlight the suggestion as the mouse hovers over it
                   onMouseEnter={() => setSelectedIndex(index)}
                 >
@@ -376,9 +382,9 @@ export const DateTimePicker = forwardRef<HTMLInputElement, DateTimePickerProps>(
                   <span className="text-muted-foreground shrink-0 text-xs">
                     {dateTimeFormatFunction(sugg.date)}
                   </span>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>
